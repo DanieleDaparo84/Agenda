@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Agenda Appuntamenti</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Agenda Appuntamenti</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/appuntamenti}">Agenda</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<h1>Lista Appuntamenti</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/appuntamenti/new}"
+					class="btn btn-primary btn-sm mb-3"> Aggiungi Appuntamento</a>
+			</div>
+			<div class="col-lg-3">
+				<form method="get">
+					<input type="search" name="s" /> <input type="submit"
+						value="Cerca Tipologia" /> <input type="reset" />
+				</form>
+			</div>
+				<div class="col-lg-3">
+				<form method="get">
+					<input type="search" name="id" /> <input type="submit"
+						value="Cerca Id" /> <input type="reset" />
+				</form>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+				<th>#</th>
+					<th>Data</th>
+					<th>Tipologia</th>
+					<th>Descrizione</th>
+					<th>Ufficio</th>
+					<th>Ufficiomto</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tBody>
+				<tr th:each="appuntamento: ${appuntamenti}">
+				    <td th:text="${appuntamento.id}"></td>
+					<td th:text="${#dates.format(appuntamento.data, 'yyyy-MM-dd')}"></td>
+					<td th:text="${appuntamento.tipologia}"></td>
+					<td th:text="${appuntamento.descrizione}"></td>
+					<td th:text="${appuntamento.ufficio}"></td>
+					<td th:text="${appuntamento.ufficiomto?.nome}"></td>
+					<td><a
+						th:href="@{/appuntamenti/edit/{id}(id=${appuntamento.id})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/appuntamenti/{id}(id=${appuntamento.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tBody>
+
+		</table>
+
+	</div>
+
+</body>
+</html>

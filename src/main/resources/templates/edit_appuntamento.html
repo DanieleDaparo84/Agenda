@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Agenda appuntamenti</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Agenda</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/appuntamenti}">Agenda</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Update Agenda</h1>
+				<div class="card-body">
+					<form th:action="@{/appuntamenti/{id} (id=${appuntamento.id})}"
+						th:Object="${appuntamento}" method="POST">
+						<div class="form-group">
+							<label> Agenda Data</label> <input type="date" name="data"
+								th:field="*{data}" class="form-control"
+								placeholder="Enter Appuntamento Data" />
+						</div>
+						<div class="form-group">
+							<label> Agenda Tipologia</label> <input type="text"
+								name="tipologia" th:field="*{tipologia}" class="form-control"
+								placeholder="Enter Appuntamento Tipologia" />
+						</div>
+
+						<div class="form-group">
+							<label> Agenda Descrizione</label> <input type="text"
+								name="descrizione" th:field="*{descrizione}"
+								class="form-control"
+								placeholder="Enter Appuntamento Descrizione" />
+						</div>
+						<div class="form-group">
+							<label> Appuntamento Ufficio</label> <select
+								th:field="*{ufficio}">
+								<option th:each="ufficio: ${uffici}" th:text="${ufficio.nome}"
+									th:value="${ufficio.nome}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label> Appuntamento Ufficiomto</label> <select
+								th:field="*{ufficiomto}">
+								<option th:each="ufficio: ${uffici}" th:text="${ufficio.nome}"
+									th:value="${ufficio.id}"></option>
+							</select>
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
